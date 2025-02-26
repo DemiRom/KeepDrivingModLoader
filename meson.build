@@ -5,5 +5,17 @@ project(
 	default_options: ['warning_level=3'],
 )
 
-executable('DataPacker', 'DataPacker/src/datapacker.c', install: true)
-executable('DataExtractor', 'DataExtractor/src/dataextractor.c', install: true)
+lib = library(
+	'gmmodloader',
+	'LibGMModLoader/src/libmodloader.c',
+	'LibGMModLoader/libmodloader.h',
+	install: true,
+)
+
+executable('DataPacker', 'DataPacker/src/datapacker.c', link_with: lib, install: true)
+executable(
+	'DataExtractor',
+	'DataExtractor/src/dataextractor.c',
+	link_with: lib,
+	install: true,
+)
